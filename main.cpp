@@ -26,7 +26,7 @@ public:
     CityNode *destination;
     EdgeInfo info;
 
-    CityEdge(CityNode * _source, CityNode * _destination, const EdgeInfo &_info) : source(_source), destination(_destination), info(_info) {}
+    CityEdge(CityNode *_source, CityNode *_destination, const EdgeInfo &_info) : source(_source), destination(_destination), info(_info) {}
 };
 
 class CityNode
@@ -37,8 +37,6 @@ public:
     vector<CityEdge *> edges;
     CityNode(int _id, const string &_type) : id(_id), type(_type) {}
 };
-
-
 
 class CityGraph
 {
@@ -59,7 +57,7 @@ private:
         return nullptr;
     }
 
-     void findAllPathsHelper(CityNode *currentNode, CityNode *endNode, vector<int> &currentPath, vector<vector<int>> &allPaths, unordered_set<int> &visitedNodes)
+    void findAllPathsHelper(CityNode *currentNode, CityNode *endNode, vector<int> &currentPath, vector<vector<int>> &allPaths, unordered_set<int> &visitedNodes)
     {
         currentPath.push_back(currentNode->id);
         visitedNodes.insert(currentNode->id);
@@ -93,7 +91,7 @@ private:
         for (const auto &path : allPaths)
         {
             double convenienceScore = calculateConvenienceScore(path);
-            cout<<convenienceScore<<endl;
+            cout << convenienceScore << endl;
             if (convenienceScore < minConvenienceScore)
             {
                 minConvenienceScore = convenienceScore;
@@ -103,7 +101,6 @@ private:
 
         return mostConvenientPath;
     }
-
 
     // Calculate the convenience score for a path
     double calculateConvenienceScore(const vector<int> &path)
@@ -131,8 +128,7 @@ private:
         return totalScore;
     }
 
-
-        // Display a path
+    // Display a path
     void displayPath(const vector<int> &path)
     {
         for (size_t i = 0; i < path.size(); ++i)
@@ -146,8 +142,6 @@ private:
 
         cout << endl;
     }
-
-    
 
 public:
     vector<vector<int>> allPaths;
@@ -167,12 +161,12 @@ public:
         if (source && destination)
         {
             EdgeInfo edgeInfo(distance, traffic, redLight);
-            CityEdge *newEdge = new CityEdge(source,destination, edgeInfo);
+            CityEdge *newEdge = new CityEdge(source, destination, edgeInfo);
             source->edges.push_back(newEdge);
         }
     }
 
-     void findAllPaths(int start, int end)
+    void findAllPaths(int start, int end)
     {
         CityNode *startNode = findNode(start);
         CityNode *endNode = findNode(end);
@@ -195,11 +189,13 @@ public:
             displayPath(path);
         }
 
-        cout<<endl<<"MOST CONVENIENT PATH  IS";
+        cout << endl
+             << "MOST CONVENIENT PATH  IS";
 
-        cout<<endl<<endl;
+        cout << endl
+             << endl;
 
-         if (!allPaths.empty())
+        if (!allPaths.empty())
         {
             vector<int> mostConvenientPath = findMostConvenientPath(allPaths);
             cout << "Most convenient path: ";
@@ -210,7 +206,6 @@ public:
             cout << "No paths found." << endl;
         }
     }
-
 
     // Display the graph
     void displayGraph()
@@ -244,7 +239,6 @@ public:
         cout << endl
              << endl;
 
-
         for (int i = 1; i <= 15; ++i)
         {
             CityNode *node = findNode(i);
@@ -254,11 +248,11 @@ public:
                 for (auto edge : edges)
                 {
                     cout << node->type[0] << i << " --> ";
-                    
+
                     cout << edge->destination->type[0] << edge->destination->id << " (D: " << edge->info.distance
                          << ", T: " << edge->info.traffic << ", RL: " << edge->info.redLight << ") ";
-                    
-                    cout<<endl;
+
+                    cout << endl;
                 }
                 cout << endl;
             }
@@ -279,8 +273,8 @@ public:
 int generateRandomNumber(int lower, int upper)
 {
 
-    random_device rd;
-    mt19937 gen(rd());
+    static random_device rd;
+    static mt19937 gen(rd());
     uniform_int_distribution<int> distribution(lower, upper);
     return distribution(gen);
 }
