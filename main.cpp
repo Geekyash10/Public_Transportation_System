@@ -85,7 +85,54 @@ private:
         visitedNodes.erase(currentNode->id);
     }
 
-    // Display a path
+    vector<int> findMostConvenientPath(const vector<vector<int>> &allPaths)
+    {
+        vector<int> mostConvenientPath;
+        double minConvenienceScore = numeric_limits<double>::infinity();
+
+        for (const auto &path : allPaths)
+        {
+            double convenienceScore = calculateConvenienceScore(path);
+            cout<<convenienceScore<<endl;
+            if (convenienceScore < minConvenienceScore)
+            {
+                minConvenienceScore = convenienceScore;
+                mostConvenientPath = path;
+            }
+        }
+
+        return mostConvenientPath;
+    }
+
+
+    // Calculate the convenience score for a path
+    double calculateConvenienceScore(const vector<int> &path)
+    {
+        double totalScore = 0.0;
+        const double epsilon = 1e-2;
+        for (size_t i = 0; i < path.size() - 1; ++i)
+        {
+            CityNode *source = findNode(path[i]);
+            CityNode *destination = findNode(path[i + 1]);
+            if (source && destination)
+            {
+                for (CityEdge *edge : source->edges)
+                {
+                    if (edge->destination == destination)
+                    {
+                        // Adjust weights to minimize distance, red light, and traffic
+                        totalScore += 0.5 / (edge->info.distance + epsilon) + 0.3 / (edge->info.redLight + epsilon) + 0.2 / (edge->info.traffic + epsilon);
+                        break;
+                    }
+                }
+            }
+        }
+
+        return totalScore;
+    }
+
+
+        // Display a path
     void displayPath(const vector<int> &path)
     {
         for (size_t i = 0; i < path.size(); ++i)
@@ -103,7 +150,7 @@ private:
     
 
 public:
-
+    vector<vector<int>> allPaths;
     // Add a new node to the city
     void addNode(int nodeId, const string &nodeType)
     {
@@ -137,7 +184,6 @@ public:
         }
 
         vector<int> currentPath;
-        vector<vector<int>> allPaths;
         unordered_set<int> visitedNodes;
 
         cout << "All paths from " << startNode->type << startNode->id << " to " << endNode->type << endNode->id << ":" << endl;
@@ -147,6 +193,21 @@ public:
         for (const auto &path : allPaths)
         {
             displayPath(path);
+        }
+
+        cout<<endl<<"MOST CONVENIENT PATH  IS";
+
+        cout<<endl<<endl;
+
+         if (!allPaths.empty())
+        {
+            vector<int> mostConvenientPath = findMostConvenientPath(allPaths);
+            cout << "Most convenient path: ";
+            displayPath(mostConvenientPath);
+        }
+        else
+        {
+            cout << "No paths found." << endl;
         }
     }
 
@@ -190,7 +251,6 @@ public:
             if (node)
             {
                 vector<CityEdge *> edges = node->edges;
-                cout << "| ";
                 for (auto edge : edges)
                 {
                     cout << node->type[0] << i << " --> ";
@@ -198,7 +258,7 @@ public:
                     cout << edge->destination->type[0] << edge->destination->id << " (D: " << edge->info.distance
                          << ", T: " << edge->info.traffic << ", RL: " << edge->info.redLight << ") ";
                     
-                    cout << " || ";
+                    cout<<endl;
                 }
                 cout << endl;
             }
