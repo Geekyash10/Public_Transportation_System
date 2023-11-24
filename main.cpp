@@ -6,6 +6,8 @@
 #include <unordered_set>
 using namespace std;
 
+
+int Totalnode = 7;
 class EdgeInfo
 {
 public:
@@ -91,14 +93,14 @@ private:
         for (const auto &path : allPaths)
         {
             double convenienceScore = calculateConvenienceScore(path);
-            cout << convenienceScore << endl;
+            cout << "convenient score  "<< convenienceScore << endl;
             if (convenienceScore < minConvenienceScore)
             {
                 minConvenienceScore = convenienceScore;
                 mostConvenientPath = path;
             }
         }
-
+        cout<<endl;
         return mostConvenientPath;
     }
 
@@ -107,7 +109,7 @@ private:
     {
         double totalScore = 0.0;
         const double epsilon = 1e-2;
-        for (size_t i = 0; i < path.size() - 1; ++i)
+        for (int  i = 0; i < path.size() - 1; ++i)
         {
             CityNode *source = findNode(path[i]);
             CityNode *destination = findNode(path[i + 1]);
@@ -212,13 +214,13 @@ public:
     // Display the graph
     void displayGraph()
     {
-        for (int i = 1; i <= 6; ++i)
+        for (int i = 1; i <= Totalnode ; ++i)
         {
             cout << "+------";
         }
         cout << "+" << endl;
 
-        for (int i = 1; i <= 6; ++i)
+        for (int i = 1; i <= Totalnode; ++i)
         {
             CityNode *node = findNode(i);
             if (node)
@@ -232,7 +234,7 @@ public:
         }
         cout << "|" << endl;
 
-        for (int i = 1; i <= 6; ++i)
+        for (int i = 1; i <= Totalnode; ++i)
         {
             cout << "+------";
         }
@@ -241,7 +243,7 @@ public:
         cout << endl
              << endl;
 
-        for (int i = 1; i <= 6; ++i)
+        for (int i = 1; i <= Totalnode; ++i)
         {
             CityNode *node = findNode(i);
             if (node)
@@ -264,7 +266,7 @@ public:
             }
         }
 
-        for (int i = 1; i <= 6; ++i)
+        for (int i = 1; i <= Totalnode; ++i)
         {
             cout << "+-----------------";
         }
@@ -293,6 +295,7 @@ void createCity(CityGraph &city)
 
 
     city.addEdge(1, 2, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(2, 1, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
     city.addEdge(1, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
     city.addEdge(2, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
     city.addEdge(2, 4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
@@ -304,6 +307,13 @@ void createCity(CityGraph &city)
     city.addEdge(5, 3, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
     city.addEdge(6, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
     city.addEdge(6, 4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(6, 7, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(5,7, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(3,7, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(7,4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(7,6, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(2,7, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+
 
 }
 
@@ -314,7 +324,7 @@ int main()
     CityGraph city;
 
     // Add 15 city nodes with different types
-    for (int i = 1; i <= 6; ++i)
+    for (int i = 1; i <= Totalnode; ++i)
     {
         string nodeType;
         if (i % 3 == 0)
@@ -350,7 +360,7 @@ int main()
         if (choice == 1)
         {
             int start, end;
-            cout << "Enter the starting position (1-6): ";
+            cout << "Enter the starting position (1-7): ";
             cin >> start;
 
             // Validate start position
@@ -360,7 +370,7 @@ int main()
                 continue;
             }
 
-            cout << "Enter the destination position (1-6): ";
+            cout << "Enter the destination position (1-7): ";
             cin >> end;
 
             // Validate end position
