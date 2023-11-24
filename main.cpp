@@ -205,18 +205,20 @@ public:
         {
             cout << "No paths found." << endl;
         }
+
+    
     }
 
     // Display the graph
     void displayGraph()
     {
-        for (int i = 1; i <= 14; ++i)
+        for (int i = 1; i <= 6; ++i)
         {
             cout << "+------";
         }
         cout << "+" << endl;
 
-        for (int i = 1; i <= 15; ++i)
+        for (int i = 1; i <= 6; ++i)
         {
             CityNode *node = findNode(i);
             if (node)
@@ -230,7 +232,7 @@ public:
         }
         cout << "|" << endl;
 
-        for (int i = 1; i <= 14; ++i)
+        for (int i = 1; i <= 6; ++i)
         {
             cout << "+------";
         }
@@ -239,7 +241,7 @@ public:
         cout << endl
              << endl;
 
-        for (int i = 1; i <= 15; ++i)
+        for (int i = 1; i <= 6; ++i)
         {
             CityNode *node = findNode(i);
             if (node)
@@ -262,7 +264,7 @@ public:
             }
         }
 
-        for (int i = 1; i <= 15; ++i)
+        for (int i = 1; i <= 6; ++i)
         {
             cout << "+-----------------";
         }
@@ -289,52 +291,30 @@ void createCity(CityGraph &city)
     int Tlower = 2;
     int Tupper = 8;
 
-    // Generate a random number within the specified range
-    int diastance = generateRandomNumber(Dlower, Dupper);
-    int redlight = generateRandomNumber(RLlower, RLupper);
-    int traffic = generateRandomNumber(Tlower, Tupper);
 
-    for (int i = 1; i <= 14; ++i)
-    {
-        for (int j = i + 1; j <= 15; ++j)
-        {
-            // Generate a random number within the specified range
-            int distance = generateRandomNumber(Dlower, Dupper);
-            int redlight = generateRandomNumber(RLlower, RLupper);
-            int traffic = generateRandomNumber(Tlower, Tupper);
+    city.addEdge(1, 2, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(1, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(2, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(2, 4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(3, 4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(3, 6, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(4, 3, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(4 ,6, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(5, 2, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(5, 3, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(6, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
+    city.addEdge(6, 4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
 
-            city.addEdge(i, j, distance, traffic, redlight);
-        }
-    }
-
-    // city.addEdge(1, 2, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(1, 4, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(2, 3, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(2, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(3, 6, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(4, 5, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(4, 7, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(5, 6, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(5, 8, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(6, 9, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(7, 8, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(7, 10, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(8, 9, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(8, 11, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(9, 12, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(10, 11, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(11, 12, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(12, 13, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(13, 14, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
-    // city.addEdge(14, 15, generateRandomNumber(Dlower, Dupper), generateRandomNumber(Tlower, Tupper), generateRandomNumber(RLlower, RLupper));
 }
+
+
 
 int main()
 {
     CityGraph city;
 
-    // Add 15 city with different types
-    for (int i = 1; i <= 15; ++i)
+    // Add 15 city nodes with different types
+    for (int i = 1; i <= 6; ++i)
     {
         string nodeType;
         if (i % 3 == 0)
@@ -358,14 +338,66 @@ int main()
     city.displayGraph();
     cout << endl
          << endl;
-    int start, end;
-    cout << "Enter the starting position (1-15): ";
-    cin >> start;
-    cout << "Enter the destination position (1-15): ";
-    cin >> end;
 
-    // Find and display all paths between the start and end positions
-    city.findAllPaths(start, end);
+    int choice;
+    cout << "Enter Choice" << endl;
+    cout << "1. Show the path between 2 nodes" << endl;
+    cout << "2. Exit" << endl;
+    cin >> choice;
+
+    while (choice != 2)
+    {
+        if (choice == 1)
+        {
+            int start, end;
+            cout << "Enter the starting position (1-6): ";
+            cin >> start;
+
+            // Validate start position
+            if (start < 1 || start > 15)
+            {
+                cout << "Invalid starting position. Please enter a number between 1 and 6." << endl;
+                continue;
+            }
+
+            cout << "Enter the destination position (1-6): ";
+            cin >> end;
+
+            // Validate end position
+            if (end < 1 || end > 15)
+            {
+                cout << "Invalid destination position. Please enter a number between 1 and 6." << endl;
+                continue;
+            }
+
+            // Validate that start and end positions are different
+            if (start == end)
+            {
+                cout << "Start and end positions should be different." << endl;
+                continue;
+            }
+
+            // Find and display all paths between the start and end positions
+            city.findAllPaths(start, end);
+
+            if (city.allPaths.empty())
+            {
+                cout << "No paths found between nodes " << start << " and " << end << "." << endl;
+            }
+
+            city.allPaths.clear();
+        }
+        else
+        {
+            cout << "Invalid choice. Please enter 1 or 2." << endl;
+        }
+
+        cout << endl
+             << "Enter Choice" << endl;
+        cout << "1. Show the path between 2 nodes" << endl;
+        cout << "2. Exit" << endl;
+        cin >> choice;
+    }
 
     return 0;
 }
