@@ -30,8 +30,8 @@ This project is a C++ implementation of a city  Public transpotation System. It 
 ## Setup Instructions
 
 1. **Prerequisites**:
-   - A C++ compiler (e.g., GCC, Clang, or MSVC).
-   - A text editor or IDE for C++ development (e.g., Visual Studio Code, CLion).
+   - A C++ compiler ( GCC)
+   - A text editor or IDE for C++ development ( Visual Studio Code).
 
 2. **Compilation**:
    Compile the code using a C++ compiler. For example:
